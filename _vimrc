@@ -1,52 +1,31 @@
-" Vim with all enhancements
-source $VIMRUNTIME/vimrc_example.vim
-
-" Use the internal diff if available.
-" Otherwise use the special 'diffexpr' for Windows.
-if &diffopt !~# 'internal'
-  set diffexpr=MyDiff()
-endif
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg1 = substitute(arg1, '!', '\!', 'g')
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg2 = substitute(arg2, '!', '\!', 'g')
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let arg3 = substitute(arg3, '!', '\!', 'g')
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  let cmd = substitute(cmd, '!', '\!', 'g')
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
+" ------------------------------
+" Name: vimrc for windows
+" Author: Joye
+" Email: chenchenjoye@sina.com
+" ------------------------------
 
 
 " Startup {{{
 filetype indent plugin on
 
+augroup vimrcEx
+au!
+
+autocmd FileType text setlocal textwidth=78
+
+augroup END
 
 " vim 文件折叠方式为 marker
 augroup ft_vim
     au!
+	
+	autocmd FileType vim setlocal foldmethod=marker
+
+    " 打开文件总是定位到上次编辑的位置
+    autocmd BufReadPost *
+      \ if line("'\"") > 1 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 
     au FileType vim setlocal foldmethod=marker
 augroup END
@@ -210,7 +189,7 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -226,7 +205,7 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'vim-scripts/winmanager'
 Plugin 'scrooloose/nerdtree'
-Plugin 'godlygeek/tabular'
+" Plugin 'godlygeek/tabular'
 Plugin 'bling/vim-airline'
 
 
