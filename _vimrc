@@ -1,5 +1,5 @@
 " ------------------------------
-" Name: vimrc for windows
+" Name: _vimrc for windows
 " Author: Joye
 " Email: chenchenjoye@sina.com
 " ------------------------------
@@ -80,12 +80,11 @@ set guifont=Consolas:h11
 "set guifont=Consolas:h12:cANSI
 " }}}
 
-
 " Format {{{
 set autoindent
 set smartindent
 set tabstop=4
-set expandtab
+set noexpandtab
 set softtabstop=4
 set shiftwidth =4
 set foldmethod=indent
@@ -170,7 +169,6 @@ nnoremap <C-left> :bn<CR>
 nnoremap <C-right> :bp<CR>
 
 " }}}
-
 
 " Vundle {{{
 filetype off                  " required
