@@ -9,43 +9,36 @@
 filetype plugin on
 
 augroup vimrcEx
-au!
-
-autocmd FileType text setlocal textwidth=78
-
+	au!
+	autocmd FileType text setlocal textwidth=78
 augroup END
 
 " vim 文件折叠方式为 marker
 augroup ft_vim
-    au!
-	
+	au!
 	autocmd FileType vim setlocal foldmethod=marker
-
-    " 打开文件总是定位到上次编辑的位置
-    autocmd BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \   exe "normal! g`\"" |
-      \ endif
-
-    au FileType vim setlocal foldmethod=marker
+	" 打开文件总是定位到上次编辑的位置
+	autocmd BufReadPost *
+				\ if line("'\"") > 1 && line("'\"") <= line("$") |
+				\   exe "normal! g`\"" |
+				\ endif
+	au FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
 
 " General {{{
-set nocompatible
+set nocompatible			"不兼容vi
 set nobackup
 set noswapfile
-set history=1024
-set autochdir
+set history=1024			"记住多少次历史操作
+set autochdir				"自动切换目录
 set whichwrap=b,s,<,>,[,]
 set nobomb
 set backspace=indent,eol,start whichwrap+=<,>,[,]
-
 " Vim 的默认寄存器和系统剪贴板共享
 " set clipboard+=unnamed
 " 设置 alt 键不映射到菜单栏
 " set winaltkeys=no
-
 " }}}
 
 " Lang & Encoding {{{
@@ -57,12 +50,11 @@ let $LANG = 'en_US.UTF-8'
 " }}}
 
 " GUI {{{
-
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
-set cursorline
-set hlsearch
-set number
+set cursorline			"高亮当前行
+set hlsearch			"选中高亮
+set number				"显示行号
 " 窗口大小
 set lines=35 columns=140
 " 分割出来的窗口位于当前窗口下边/右边
@@ -83,23 +75,25 @@ set guifont=Consolas:h11
 " }}}
 
 " Format {{{
-set autoindent
-set smartindent
-set tabstop=4
-set noexpandtab
-set softtabstop=4
-set shiftwidth =4
+"set ai!
+set autoindent				"自动缩进
+set smartindent				"智能缩进
+set tabstop=4				"Tab显示空格数
+set noexpandtab				"使用Tab不使用Space
+set softtabstop=4			"Tab转换为多少空格
+set shiftwidth =4			"缩进大小
 set foldmethod=indent
-set ai!
-set ruler
-set incsearch
-set showmatch
-filetype on
-syntax on
+set ruler					"显示光标位置的状态行
+set incsearch				"每输入一个，转跳上去
+set showmatch				"自动高亮对应的括号之类的
+set wildmenu				"命令模式下自动补全
+set wildmode=longest:list,full
+filetype on					"检测文件的类型
+syntax on					"语法高亮
 " }}}
 
-
 " Keymap {{{
+" 自定义快捷键
 let mapleader=","
 
 nmap <leader>s :source $VIM/_vimrc<cr>
@@ -131,8 +125,9 @@ inoremap <M-l> <Right>
 " IDE like delete
 inoremap <C-BS> <Esc>bdei
 
-nnoremap vv ^vg_
 " 转换当前行为大写
+nnoremap vv ^vg_
+
 inoremap <C-u> <esc>mzgUiw`za
 " 命令模式下的行首尾
 cnoremap <C-a> <home>
@@ -174,27 +169,22 @@ nnoremap <C-right> :bp<CR>
 
 " Vundle {{{
 filetype off                  " required
-
 set rtp+=$VIM/vimfiles/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-
-Plugin 'gmarik/Vundle.vim'   " required
-
+Plugin 'gmarik/Vundle.vim'		" required
 Plugin 'vim-scripts/winmanager'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'godlygeek/tabular'
 Plugin 'bling/vim-airline'
-
 " All of your Plugins must be added before the following line
-
+"
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 " }}}
 
-" winmanager {{{
+" winmanager set {{{
 let g:winManagerWindowLayout='FileExplorer|TagList'
 let g:winManagerWidth =25 
 nmap wm :WMToggle<cr>
