@@ -1,0 +1,21 @@
+
+" ------------------------------
+" Name: _vsvimrc for Visual Studio
+" Author: Joye
+" Email: chenchenjoye@sina.com
+" ------------------------------
+
+" GUI {{{
+set cursorline			"高亮当前行
+set hlsearch			"选中高亮
+set number				"显示行号
+" }}}
+
+" Format {{{
+set autoindent				"自动缩进
+set tabstop=4				"Tab显示空格数
+set noexpandtab				"使用Tab不使用Space
+set softtabstop=4			"Tab转换为多少空格
+set shiftwidth=4			"缩进大小
+set incsearch				"每输入一个，转跳上去
+" }}}
