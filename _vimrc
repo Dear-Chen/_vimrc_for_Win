@@ -76,6 +76,7 @@ set guifont=Consolas:h11
 
 " Format {{{
 "set ai!
+set noignorecase			"区分大小写
 set autoindent				"自动缩进
 set smartindent				"智能缩进
 set tabstop=4				"Tab显示空格数
