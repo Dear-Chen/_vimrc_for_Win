@@ -12,6 +12,7 @@ set number				"显示行号
 " }}}
 
 " Format {{{
+set ic              "区分大小写
 set autoindent				"自动缩进
 set tabstop=4				"Tab显示空格数
 set noexpandtab				"使用Tab不使用Space
